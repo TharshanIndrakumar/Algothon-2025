@@ -47,8 +47,8 @@ usage_error: str = """
         this function must take an 2-dimensional ndarray with a length of 50 and return
         an ndarray of length 50 that represent positions for each instruments
     --timeline [start_day: int] [end_day: int] supply a custom start day and end day to run the
-        backtester in. start day >= 1 and end day <= 750. If not specified, backtester will run
-        throughout days 1-750
+        backtester in. start day >= 1 and end day <= 1000. If not specified, backtester will run
+        throughout days 1-1000
     --disable-comms disable commission on trades
     --show [graph1 graph2 ...] - specify which graphs to show. If this option is not specified, 
         by default the backtester will show cumulative PnL, daily PnL and capital utilisation. A 
@@ -109,7 +109,7 @@ class Params:
         strategy_function_name: str = default_strategy_function_name,
         strategy_function: FunctionType | None = None,
         start_day: int = 1,
-        end_day: int = 750,
+        end_day: int = 1000,
         enable_commission: bool = True,
         graphs: List[str] = ["cum-pnl", "sharpe-heat-map", "daily-pnl"],
         prices_filepath: str = "./prices.txt",
@@ -154,7 +154,7 @@ def parse_command_line_args() -> Params:
                     if (
                         params.start_day > params.end_day
                         or params.start_day < 1
-                        or params.end_day > 750
+                        or params.end_day > 1000
                     ):
                         raise Exception(usage_error)
             elif current_arg == "--disable-comms":
